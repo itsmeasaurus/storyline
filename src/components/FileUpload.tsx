@@ -276,51 +276,56 @@ export default function FileUpload({ setTimelineData }: FileUploadProps) {
 
   if (showManualForm) {
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-          <div className="p-6">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-semibold">Manual Timeline Entry</h2>
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+          <div className="p-4 sm:p-6">
+            <div className="flex justify-between items-center mb-4 sm:mb-6">
+              <h2 className="text-lg sm:text-xl font-semibold">Manual Timeline Entry</h2>
               <button
                 onClick={() => setShowManualForm(false)}
                 className="text-gray-400 hover:text-gray-500"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 sm:w-6 h-5 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
 
             {error && (
-              <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-md">
-                <p className="text-sm text-red-600">{error}</p>
+              <div className="mb-4 p-3 sm:p-4 bg-red-50 border border-red-200 rounded-md">
+                <div className="flex items-center">
+                  <svg className="w-4 sm:w-5 h-4 sm:h-5 text-red-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <p className="text-xs sm:text-sm text-red-600">{error}</p>
+                </div>
               </div>
             )}
 
             <div className="space-y-4">
               {manualEntries.map((entry, index) => (
-                <div key={index} className="p-4 border rounded-lg relative">
-                  <div className="grid grid-cols-3 gap-4 mb-4">
+                <div key={index} className="p-3 sm:p-4 border rounded-lg relative">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                         Phase/Goal <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
                         value={entry.phase}
                         onChange={(e) => handleManualEntryChange(index, 'phase', e.target.value)}
-                        className="w-full border border-gray-300 rounded-md px-3 py-2"
+                        className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
                         placeholder="Enter phase name"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                         Start Month <span className="text-red-500">*</span>
                       </label>
                       <select
                         value={entry.startMonth}
                         onChange={(e) => handleManualEntryChange(index, 'startMonth', parseInt(e.target.value))}
-                        className="w-full border border-gray-300 rounded-md px-3 py-2"
+                        className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
                       >
                         {MONTHS.map(month => (
                           <option key={month.value} value={month.value}>
@@ -330,13 +335,13 @@ export default function FileUpload({ setTimelineData }: FileUploadProps) {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                         End Month <span className="text-red-500">*</span>
                       </label>
                       <select
                         value={entry.endMonth}
                         onChange={(e) => handleManualEntryChange(index, 'endMonth', parseInt(e.target.value))}
-                        className="w-full border border-gray-300 rounded-md px-3 py-2"
+                        className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
                       >
                         {MONTHS.map(month => (
                           <option key={month.value} value={month.value}>
@@ -347,13 +352,13 @@ export default function FileUpload({ setTimelineData }: FileUploadProps) {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                       Description
                     </label>
                     <textarea
                       value={entry.description}
                       onChange={(e) => handleManualEntryChange(index, 'description', e.target.value)}
-                      className="w-full border border-gray-300 rounded-md px-3 py-2 h-24 resize-none"
+                      className="w-full border border-gray-300 rounded-md px-3 py-2 h-20 sm:h-24 resize-none text-sm"
                       placeholder="Enter any additional information about this phase/goal"
                     />
                   </div>
@@ -371,19 +376,19 @@ export default function FileUpload({ setTimelineData }: FileUploadProps) {
               ))}
             </div>
 
-            <div className="mt-6 flex gap-4">
+            <div className="mt-6 flex flex-col sm:flex-row gap-4">
               <button
                 onClick={handleAddEntry}
-                className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200"
+                className="flex items-center justify-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 text-sm"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 sm:w-5 h-4 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
                 Add Another Entry
               </button>
               <button
                 onClick={handleManualSubmit}
-                className="flex-1 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                className="flex-1 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 text-sm sm:text-base"
               >
                 Create Timeline
               </button>
@@ -396,19 +401,19 @@ export default function FileUpload({ setTimelineData }: FileUploadProps) {
 
   if (showMapping) {
     return (
-      <div className="bg-white p-6 rounded-lg shadow-lg">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold">Map Fields & Preview</h2>
-          <div className="flex gap-4">
+      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+          <h2 className="text-xl font-semibold mb-4 sm:mb-0">Map Fields & Preview</h2>
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <button
               onClick={() => setShowManualForm(true)}
-              className="text-blue-500 hover:text-blue-600"
+              className="text-blue-500 hover:text-blue-600 text-center sm:text-left"
             >
               Enter Manually Instead
             </button>
             <button
               onClick={resetUpload}
-              className="text-sm text-blue-500 hover:text-blue-600 flex items-center gap-2"
+              className="text-blue-500 hover:text-blue-600 flex items-center justify-center sm:justify-start gap-2"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -419,7 +424,7 @@ export default function FileUpload({ setTimelineData }: FileUploadProps) {
         </div>
 
         {error && (
-          <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-md">
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-md">
             <div className="flex items-center">
               <svg className="w-5 h-5 text-red-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -429,108 +434,107 @@ export default function FileUpload({ setTimelineData }: FileUploadProps) {
           </div>
         )}
 
-        <div className="grid grid-cols-2 gap-6">
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Phase Field
-              </label>
-              <select 
-                className="w-full border border-gray-300 rounded-md px-3 py-2"
-                value={fieldMapping.phase}
-                onChange={(e) => setFieldMapping(prev => ({ ...prev, phase: e.target.value }))}
+        <div className="flex flex-col gap-6">
+          {/* Field Mapping Section */}
+          <div className="bg-gray-50 p-4 sm:p-6 rounded-lg">
+            <h3 className="text-lg font-medium text-gray-700 mb-4">Map CSV Fields</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Phase Field <span className="text-red-500">*</span>
+                </label>
+                <select 
+                  className="w-full border border-gray-300 rounded-md px-3 py-2"
+                  value={fieldMapping.phase}
+                  onChange={(e) => setFieldMapping(prev => ({ ...prev, phase: e.target.value }))}
+                >
+                  <option value="">Select field</option>
+                  {csvHeaders.map(header => (
+                    <option key={header} value={header}>{header}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Start Date Field <span className="text-red-500">*</span>
+                </label>
+                <select 
+                  className="w-full border border-gray-300 rounded-md px-3 py-2"
+                  value={fieldMapping.startDate}
+                  onChange={(e) => setFieldMapping(prev => ({ ...prev, startDate: e.target.value }))}
+                >
+                  <option value="">Select field</option>
+                  {csvHeaders.map(header => (
+                    <option key={header} value={header}>{header}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  End Date Field <span className="text-red-500">*</span>
+                </label>
+                <select 
+                  className="w-full border border-gray-300 rounded-md px-3 py-2"
+                  value={fieldMapping.endDate}
+                  onChange={(e) => setFieldMapping(prev => ({ ...prev, endDate: e.target.value }))}
+                >
+                  <option value="">Select field</option>
+                  {csvHeaders.map(header => (
+                    <option key={header} value={header}>{header}</option>
+                  ))}
+                </select>
+              </div>
+              <button
+                onClick={handleMappingSubmit}
+                disabled={!fieldMapping.phase || !fieldMapping.startDate || !fieldMapping.endDate}
+                className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed"
               >
-                <option value="">Select field</option>
-                {csvHeaders.map(header => (
-                  <option key={header} value={header}>{header}</option>
-                ))}
-              </select>
+                Continue
+              </button>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Start Date Field
-              </label>
-              <select 
-                className="w-full border border-gray-300 rounded-md px-3 py-2"
-                value={fieldMapping.startDate}
-                onChange={(e) => setFieldMapping(prev => ({ ...prev, startDate: e.target.value }))}
-              >
-                <option value="">Select field</option>
-                {csvHeaders.map(header => (
-                  <option key={header} value={header}>{header}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                End Date Field
-              </label>
-              <select 
-                className="w-full border border-gray-300 rounded-md px-3 py-2"
-                value={fieldMapping.endDate}
-                onChange={(e) => setFieldMapping(prev => ({ ...prev, endDate: e.target.value }))}
-              >
-                <option value="">Select field</option>
-                {csvHeaders.map(header => (
-                  <option key={header} value={header}>{header}</option>
-                ))}
-              </select>
-            </div>
-            <button
-              onClick={handleMappingSubmit}
-              disabled={!fieldMapping.phase || !fieldMapping.startDate || !fieldMapping.endDate}
-              className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed"
-            >
-              Continue
-            </button>
           </div>
 
-          <div className="border rounded-lg overflow-hidden">
-            <div className="bg-gray-50 px-4 py-2 border-b">
-              <h3 className="text-sm font-medium text-gray-700">
+          {/* File Preview Section */}
+          <div className="bg-gray-50 rounded-lg overflow-hidden">
+            <div className="px-4 py-3 border-b border-gray-200">
+              <h3 className="text-lg font-medium text-gray-700">
                 File Preview: {lastFile?.name}
               </h3>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full divide-y divide-gray-200">
-                <colgroup>
-                  {previewData[0]?.map((_, index) => (
-                    <col key={index} className="w-1/3" />
-                  ))}
-                </colgroup>
-                <thead className="bg-gray-50">
-                  <tr>
-                    {previewData[0]?.map((header, index) => (
-                      <th
-                        key={index}
-                        className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        style={{ minWidth: '200px' }}
-                      >
-                        <div className="truncate" title={header}>
-                          {header}
-                        </div>
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {previewData.slice(1, 5).map((row, rowIndex) => (
-                    <tr key={rowIndex}>
-                      {row.map((cell, cellIndex) => (
-                        <td
-                          key={cellIndex}
-                          className="px-4 py-2 text-sm text-gray-500 align-top"
-                          style={{ minWidth: '200px', maxWidth: '200px' }}
+            <div className="p-4">
+              <div className="overflow-x-auto">
+                <table className="w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      {previewData[0]?.map((header, index) => (
+                        <th
+                          key={index}
+                          className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                         >
-                          <div className="break-words" style={{ wordBreak: 'break-word' }}>
-                            {cell}
-                          </div>
-                        </td>
+                          {header}
+                        </th>
                       ))}
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {previewData.slice(1, 5).map((row, rowIndex) => (
+                      <tr key={rowIndex}>
+                        {row.map((cell, cellIndex) => (
+                          <td
+                            key={cellIndex}
+                            className="px-3 py-2 text-sm text-gray-500 max-w-xs"
+                          >
+                            <div className="truncate" title={cell}>
+                              {cell}
+                            </div>
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-2 text-xs text-gray-500">* Showing first 4 rows of data</p>
             </div>
           </div>
         </div>
@@ -542,13 +546,13 @@ export default function FileUpload({ setTimelineData }: FileUploadProps) {
     <div className="space-y-6">
       <div 
         {...getRootProps()} 
-        className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-gray-400 bg-white transition-colors duration-200"
+        className="border-2 border-dashed border-gray-300 rounded-lg p-4 sm:p-8 text-center cursor-pointer hover:border-gray-400 bg-white transition-colors duration-200"
       >
         <input {...getInputProps()} />
         <div className="flex flex-col items-center justify-center space-y-4">
-          <div className="w-16 h-16 rounded-full bg-gray-50 flex items-center justify-center">
+          <div className="w-12 sm:w-16 h-12 sm:h-16 rounded-full bg-gray-50 flex items-center justify-center">
             <svg 
-              className="w-8 h-8 text-gray-400" 
+              className="w-6 sm:w-8 h-6 sm:h-8 text-gray-400" 
               fill="none" 
               stroke="currentColor" 
               viewBox="0 0 24 24"
@@ -562,10 +566,10 @@ export default function FileUpload({ setTimelineData }: FileUploadProps) {
             </svg>
           </div>
           <div>
-            <p className="text-lg font-medium text-gray-700">
+            <p className="text-base sm:text-lg font-medium text-gray-700">
               {isDragActive ? 'Drop the file here' : 'Drag and Drop file here or'}
             </p>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-xs sm:text-sm text-gray-500 mt-1">
               {isDragActive ? '' : <span className="text-blue-500 underline">Choose file</span>}
             </p>
           </div>
@@ -573,15 +577,138 @@ export default function FileUpload({ setTimelineData }: FileUploadProps) {
       </div>
 
       <div className="text-center">
-        <span className="text-gray-500">or</span>
+        <span className="text-sm sm:text-base text-gray-500">or</span>
       </div>
 
       <button
         onClick={() => setShowManualForm(true)}
-        className="w-full py-3 border-2 border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+        className="w-full py-2 sm:py-3 border-2 border-gray-300 rounded-lg text-sm sm:text-base text-gray-700 hover:bg-gray-50 transition-colors duration-200"
       >
         Enter Timeline Data Manually
       </button>
+
+      {showManualForm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+            <div className="p-4 sm:p-6">
+              <div className="flex justify-between items-center mb-4 sm:mb-6">
+                <h2 className="text-lg sm:text-xl font-semibold">Manual Timeline Entry</h2>
+                <button
+                  onClick={() => setShowManualForm(false)}
+                  className="text-gray-400 hover:text-gray-500"
+                >
+                  <svg className="w-5 sm:w-6 h-5 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {error && (
+                <div className="mb-4 p-3 sm:p-4 bg-red-50 border border-red-200 rounded-md">
+                  <div className="flex items-center">
+                    <svg className="w-4 sm:w-5 h-4 sm:h-5 text-red-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <p className="text-xs sm:text-sm text-red-600">{error}</p>
+                  </div>
+                </div>
+              )}
+
+              <div className="space-y-4">
+                {manualEntries.map((entry, index) => (
+                  <div key={index} className="p-3 sm:p-4 border rounded-lg relative">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-4">
+                      <div>
+                        <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
+                          Phase/Goal <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          value={entry.phase}
+                          onChange={(e) => handleManualEntryChange(index, 'phase', e.target.value)}
+                          className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
+                          placeholder="Enter phase name"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
+                          Start Month <span className="text-red-500">*</span>
+                        </label>
+                        <select
+                          value={entry.startMonth}
+                          onChange={(e) => handleManualEntryChange(index, 'startMonth', parseInt(e.target.value))}
+                          className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
+                        >
+                          {MONTHS.map(month => (
+                            <option key={month.value} value={month.value}>
+                              {month.label}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
+                          End Month <span className="text-red-500">*</span>
+                        </label>
+                        <select
+                          value={entry.endMonth}
+                          onChange={(e) => handleManualEntryChange(index, 'endMonth', parseInt(e.target.value))}
+                          className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
+                        >
+                          {MONTHS.map(month => (
+                            <option key={month.value} value={month.value}>
+                              {month.label}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
+                        Description
+                      </label>
+                      <textarea
+                        value={entry.description}
+                        onChange={(e) => handleManualEntryChange(index, 'description', e.target.value)}
+                        className="w-full border border-gray-300 rounded-md px-3 py-2 h-20 sm:h-24 resize-none text-sm"
+                        placeholder="Enter any additional information about this phase/goal"
+                      />
+                    </div>
+                    {manualEntries.length > 1 && (
+                      <button
+                        onClick={() => handleRemoveEntry(index)}
+                        className="absolute -right-2 -top-2 bg-red-100 rounded-full p-1 hover:bg-red-200"
+                      >
+                        <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6 flex flex-col sm:flex-row gap-4">
+                <button
+                  onClick={handleAddEntry}
+                  className="flex items-center justify-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 text-sm"
+                >
+                  <svg className="w-4 sm:w-5 h-4 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  </svg>
+                  Add Another Entry
+                </button>
+                <button
+                  onClick={handleManualSubmit}
+                  className="flex-1 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 text-sm sm:text-base"
+                >
+                  Create Timeline
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 } 

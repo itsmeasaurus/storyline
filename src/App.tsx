@@ -11,9 +11,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="min-h-screen bg-gray-100 p-4 sm:p-8">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8 text-gray-800">Storyline by Liam</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-gray-800">Storyline by Liam</h1>
         {timelineData.length === 0 ? (
           <FileUpload setTimelineData={setTimelineData} />
         ) : (
