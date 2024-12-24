@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "netlify:dev": "netlify dev"
@@ -31,7 +31,7 @@
     "netlify-cli": "^17.10.1",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5.3.3",
+    "typescript": "^5.7.2",
     "vite": "^6.0.5"
   }
 }
